@@ -5,12 +5,13 @@
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/GCF.css"/>
     </head>
     <body>
         <header class="page-header">
             <div class="row">
                 <div class="col-md-3">
-                    <h1><small>Golden Cloud Factory</small></h1>
+                    <h1 id="title_header"><small>Golden Cloud Factory</small></h1>
                 </div>
                 <div class="col-md-1">
                     <img alt="Logo_GCF" src="Logo/GCF_100x82.png">
@@ -118,7 +119,7 @@
         <section class="container-fluid" id="modificar_empleado">
             <div class="jumbotron" id="modificarinfo">
                 <p>Modificar empleado</p>
-                <form class="form-inline">
+                <form class="form-inline" id="formmodificar">
                     <div class="form-group">
                         <label for="buscaEmpleado">Buscar por:</label>
                         <select class="form-control" id="seleccion_parametro">
