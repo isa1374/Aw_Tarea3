@@ -75,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <label for="numeroCuenta">Numero de cuenta</label>
-                        <input type="text" class="form-control" id="textnumerocuenta" placeholder="NumeroCuenta">
+                        <input type="text" class="form-control" id="textnumerocuenta" placeholder="Numero Cuenta">
                     </div>
                     <div class="form-group">
                         <label for="departamentoempleado">Departamento</label>
@@ -88,6 +88,27 @@
                     </div>
                     </div>
                 </form>
+            </div>
+        </section>
+        <section class="container-fluid" id="Buscar_empleado">
+            <div class="jumbotron" id="formBuscar">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="buscaEmpleado">Buscar por:</label>
+                        <select class="form-control" id="seleccion_parametro">
+                            <option>Nombre</option>
+                            <option>Apellidos</option>
+                            <option>Numero de cuenta</option>
+                            <option>Departamento</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado">
+                    </div>    
+                </form>
+            </div>
+            <div class="alert alert-info" role="alert" id="Resultados">
+                <strong>Se encontraron:</strong><big id="numeroResultados"> </big> resultados.
             </div>
         </section>
         <footer class="panel-footer">Golden Cloud Factory &#174</footer>
