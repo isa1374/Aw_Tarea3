@@ -5,69 +5,64 @@
         <meta charset="UTF-8"/>
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/GCF.css"/>
     </head>
     <body>
         <header class="page-header">
-            <div class="row">
-                <div class="col-md-3">
-                    <h1 id="title_header"><small>Golden Cloud Factory</small></h1>
-                </div>
-                <div class="col-md-1">
+            <div class="row head">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-1">
                     <img alt="Logo_GCF" src="Logo/GCF_100x82.png">
                 </div>
-                <div class="col-md-8"></div>
+                <div class="col-sm-3">
+                    <h1 id="title_header"><small>Golden Cloud Factory</small></h1>
+                </div>
+                <div class="col-sm-4"></div>
             </div>
         </header>
-        <nav class="navbar navbar-default">
+        <nav class="navbar">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#Menu">
                                 <img alt="GCF" src="Logo/GCF_30x26.png">
                             </a>
                 </div>
-                <form class="navbar-form" role="search">
+                <form class="navbar-form" role="search" onsubmit="buscar()">
                     <div class="form-group">
-                        
-                        <input type="text" class="form-control" placeholder="Search">
+                        <label for="buscaEmpleado">Buscar por:</label>
+                        <select class="form-control" id="seleccion_parametro">
+                            <option value="nombre">Nombre</option>
+                            <option value="apellido">Apellidos</option>
+                            <option value="numero">Numero de cuenta</option>
+                            <option value="depto">Departamento</option>
+                        </select>
                     </div>
-                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado">
+                          <button type="submit" class="btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
                 </form>
             </div>
         </nav>
-        <section class="container-fluid" id="Menu"> 
-                <div class="jumbotron" id="CRUD_Menu">
-                    <div class="btn-group-vertical-justified" role="group" aria-label="...">
-                        <a class="btn btn-default btn-lg btn-block" href="#Crear_empleado" role="button">Crear empleado</a>
-                        <a class="btn btn-default btn-lg btn-block" href="#borrar_empleado" role="button">Borrar empleado</a>
-                        <a class="btn btn-default btn-lg btn-block" href="#modificar_empleado" role="button">Modificar empleado</a>
-                        <a class="btn btn-default btn-lg btn-block" href="#Buscar_empleado" role="button">Buscar empleado</a>
-                    </div>
-                </div>
-        </section>
-        <section class="container-fluid" id="tabla_empleados">
-            <div class="jumbotron">
-                <p>Lista de empleados</p>
-                    <table class="table table-striped table-bordered" id="tabla">
-                        <tr>
+        <section class="container jumbotron" id="tabla_empleados">
+                <p>Lista de empleados <button type="button" class="btn" data-toggle="modal" data-target="#Crear_empleado"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></p>
+                
+                    <table class="table table-striped" id="tabla">
+                        <tr id="table_header">
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Numero de Cuenta</th>
                             <th>Departamento</th>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        
                     </table>
-                </div> 
         </section>
-        <section class="container-fluid" id="Crear_empleado">
-            <div class="jumbotron" id="agregaemp">
-                <p>Agregar empleado</p>
+        <div class="container-fluid modal fade modal-sm" id="Crear_empleado">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Agregar empleado</h3>
+                </div>
+                <div class="modal-body">
                 <form onsubmit="registrar()">
                     <div class="form-group">
                         <label for="nombreEmpleado">Nombre</label>
@@ -90,54 +85,21 @@
                             <option value="Administración">Administración</option>
                         </select>
                     </div>
-                    <input type="submit" value="Registrar" >
-                </form>
-            </div>
-        </section>
-        <section class="container-fluid" id="Buscar_empleado">
-            <div class="jumbotron" id="formBuscar">
-                <p>Buscar</p>
-                <form class="form-inline" onsubmit="buscar()">
-                    <div class="form-group">
-                        <label for="buscaEmpleado">Buscar por:</label>
-                        <select class="form-control" id="seleccion_parametro">
-                            <option value="nombre">Nombre</option>
-                            <option value="apellido">Apellidos</option>
-                            <option value="numero">Numero de cuenta</option>
-                            <option value="depto">Departamento</option>
-                        </select>
+                    <div class="modal-footer">
+                    <input type="submit" value="Registrar" class="btn">
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado">
-                       <input type="submit" value="Buscar">
-                    </div> 
-                    <table id="tabla_resultados">
-                    </table>
                 </form>
+                </div>
             </div>
-            <div class="alert alert-info" role="alert" id="Resultados">
-                <strong>Se encontraron:</strong><big id="numeroResultados"> </big> resultados.
-            </div>
-        </section>
-        <section class="container-fluid" id="modificar_empleado">
-            <div class="jumbotron" id="modificarinfo">
-                <p>Modificar empleado</p>
-                <form class="form-inline" >
-                    <div class="form-group">
-                        <label for="buscaEmpleado">Buscar por:</label>
-                        <select class="form-control" id="seleccion_parametro">
-                            <option>Nombre</option>
-                            <option>Apellidos</option>
-                            <option>Numero de cuenta</option>
-                            <option>Departamento</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="textbuscarmodificarempleado" placeholder="Buscar Empleado">
-                    </div>    
-                </form>
-                <br>
-                <form>
+        </div>
+        <div class="container-fluid modal fade modal-sm" id="Modificar_empleado">
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Modificar empleado</h3>
+                </div>
+                <div class="modal-body">
+                <form onsubmit="registrar()">
                     <div class="form-group">
                         <label for="nombreEmpleado">Nombre</label>
                         <input type="text" class="form-control" id="textnombreempleado" placeholder="Nombre">
@@ -153,64 +115,20 @@
                     <div class="form-group">
                         <label for="departamentoempleado">Departamento</label>
                         <select class="form-control" id="selectdepartamento">
-                            <option>Finanzas</option>
-                            <option>Sistemas</option>
-                            <option>Mercadotecnia</option>
-                            <option>Administración</option>
+                            <option value="Finanzas">Finanzas</option>
+                            <option value="Sistemas">Sistemas</option>
+                            <option value="Mercadotecnia">Mercadotecnia</option>
+                            <option value="Administración">Administración</option>
                         </select>
                     </div>
-                </form>
-            </div>
-        </section>
-        <section class="container-fluid" id="borrar_empleado">
-             <div class="jumbotron" id="formborrar">
-                <p>Borrar empleado</p>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="buscaEmpleado">Buscar por:</label>
-                        <select class="form-control" id="seleccion_parametro">
-                            <option>Nombre</option>
-                            <option>Apellidos</option>
-                            <option>Numero de cuenta</option>
-                            <option>Departamento</option>
-                        </select>
+                    <div class="modal-footer">
+                    <input type="submit" value="Registrar">
                     </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado">
-                    </div>    
                 </form>
-                 <div id="lista_resultados_borrar">
-                     <p>Lista de resultados</p>
-                        <table class="table table-striped table-bordered">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Numero de Cuenta</th>
-                                <th>Departamento</th>
-                            </tr>
-                        </table>
                 </div>
-                 <div id="modal_confirmación">
-                    <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#borrarmodal">Borrar</button>
-                     <div id="borrarmodal" class="modal fade" role="dialog">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p> ¿Está seguro que quiere borrar a esta persona?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-default">Aceptar</button>
-                                </div>
-                            </div>
-                         </div>
-                     </div>
-                 </div>
             </div>
-        </section>
+        </div>
+        
         <footer class="panel-footer">Golden Cloud Factory &#174</footer>
     </body> 
     <script>
@@ -224,7 +142,7 @@
            arr.push({ id:cont,nombre: nombre, apellidos: apellidos, numero:numero, depto:depto});
            cont++;
            var tabla = document.getElementById("tabla");
-           var row = tabla.insertRow(cont);
+           var row = tabla.insertRow(-1);
            var cell1 = row.insertCell(0);
            var cell2 = row.insertCell(1);
            var cell3 = row.insertCell(2);
@@ -233,23 +151,17 @@
             cell2.innerHTML = apellidos;
             cell3.innerHTML = numero;
             cell4.innerHTML = depto;
+            document.getElementById("textnombreempleado").value="";
+            document.getElementById("textapellidos").value="";
+            document.getElementById("textnumerocuenta").value="";
+            document.getElementById("selectdepartamento").value="";
        };
        function buscar(){
            var clave=document.getElementById("teztbuscarempleado").value;
            var tipo=document.getElementById("seleccion_parametro").value;
            var ac=0;
-           var tabla = document.getElementById("tabla_resultados");
-           tabla.innerHTML="";
-           var theader= tabla.createTHead();
-           var row=theader.insertRow(ac);
-           var cell1 = row.insertCell(0);
-           var cell2 = row.insertCell(1);
-           var cell3= row.insertCell(2);
-           var cell4 = row.insertCell(3);
-           cell1.innerHTML="Nombre";
-           cell2.innerHTML="Apellidos";
-           cell3.innerHTML="Número de Cuenta";
-           cell4.innerHTML="Departamento";
+           var tabla = document.getElementById("tabla");
+           tabla.innerHTML="<tr><th>Nombre</th><th>Apellidos</th><th>Numero de Cuenta</th><th>Departamento</th><th></th></tr>";
            switch(tipo){
                case "nombre":
                    for(var i=0; i<cont;i++){
@@ -260,10 +172,12 @@
                            cell2 = row.insertCell(1);
                            cell3 = row.insertCell(2);
                            cell4 = row.insertCell(3);
+                           cell5 = row.insertCell(4);
                             cell1.innerHTML = arr[i].nombre;
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
+                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -276,10 +190,12 @@
                            cell2 = row.insertCell(1);
                            cell3 = row.insertCell(2);
                            cell4 = row.insertCell(3);
+                           cell5 = row.insertCell(4);
                             cell1.innerHTML = arr[i].nombre;
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
+                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -292,34 +208,43 @@
                            cell2 = row.insertCell(1);
                            cell3 = row.insertCell(2);
                            cell4 = row.insertCell(3);
+                           cell5 = row.insertCell(4);
                             cell1.innerHTML = arr[i].nombre;
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
+                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
                case "depto":
                    for(var i=0; i<cont;i++){
                        if(arr[i].depto.includes(clave)){
-                           ac++;
+                             ac++;
                            row = tabla.insertRow(ac);
                            cell1 = row.insertCell(0);
                            cell2 = row.insertCell(1);
                            cell3 = row.insertCell(2);
                            cell4 = row.insertCell(3);
+                           cell5 = row.insertCell(4);
                             cell1.innerHTML = arr[i].nombre;
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
+                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
                    
            }
        };
-       function borrar(){};
-       function modificar(){};
+       function borrar(i){
+           /*Aqui recibe el indice del cosito que quiere borrar, entonces busca en el arreglo y lo quita a partir de arr[i] y en la tabla 
+           lo quita con tabla.deleteRow(i) y hay que restarle uno al cont para que pueda agregar bien el que sigue sin que muera :) ahora que lo veo creo que el id es innecesario pero lo voy a dejar ahi por si lel*/
+       };
+       function modificar(i){
+           
+       };
         
     </script>
 </html>

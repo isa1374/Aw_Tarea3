@@ -1,0 +1,28 @@
+
+body{
+  color:#7C6E5D;  
+}
+h3{
+    text-align: center;
+}
+nav{
+    border:0 solid;
+    background: #EED8A4;
+}
+.page-header{
+    border-bottom:0;
+}
+.btn{
+    background:#395D99;
+    color:#E8E6D7;
+}
+.panel-footer{
+   background-color: #EED8A4; 
+}
+.jumbotron{
+    background: white;
+}
+#table_header{
+    background:#395D99;
+    color:white;
+}
