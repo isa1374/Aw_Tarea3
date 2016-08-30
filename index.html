@@ -128,13 +128,12 @@
                 </div>
             </div>
         </div>
-        
         <footer class="panel-footer">Golden Cloud Factory &#174</footer>
     </body> 
     <script>
         var arr=new Array();
         var cont=0;
-       function registrar(){
+        function registrar(){
            var nombre=document.getElementById("textnombreempleado").value;
             var apellidos=document.getElementById("textapellidos").value;
             var numero=document.getElementById("textnumerocuenta").value;
@@ -232,6 +231,7 @@
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
                             cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
+
                        }
                    }
                    break;
@@ -243,7 +243,7 @@
            console.log(m);
            arr.splice(i,1);
            buscar();
-       };
+           };
        function modificar(i){
            
        };
