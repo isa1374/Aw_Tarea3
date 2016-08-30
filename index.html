@@ -99,32 +99,32 @@
                 <h3 class="modal-title">Modificar empleado</h3>
                 </div>
                 <div class="modal-body">
-                <form onsubmit="registrar()">
-                    <div class="form-group">
-                        <label for="nombreEmpleado">Nombre</label>
-                        <input type="text" class="form-control" id="textnombreempleado" placeholder="Nombre">
-                    </div>
-                    <div class="form-group">
-                        <label for="apellidosEmpleado">Apellido(s)</label>
-                        <input type="text" class="form-control" id="textapellidos" placeholder="Apellidos">
-                    </div>
-                    <div class="form-group">
-                        <label for="numeroCuenta">Numero de cuenta</label>
-                        <input type="text" class="form-control" id="textnumerocuenta" placeholder="Numero Cuenta">
-                    </div>
-                    <div class="form-group">
-                        <label for="departamentoempleado">Departamento</label>
-                        <select class="form-control" id="selectdepartamento">
-                            <option value="Finanzas">Finanzas</option>
-                            <option value="Sistemas">Sistemas</option>
-                            <option value="Mercadotecnia">Mercadotecnia</option>
-                            <option value="Administración">Administración</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                    <input type="submit" value="Registrar">
-                    </div>
-                </form>
+                    <form>
+                        <div class="form-group">
+                            <label for="nombreEmpleado">Nombre</label>
+                            <input type="text" class="form-control" id="textnombreempleado" placeholder="Nombre">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellidosEmpleado">Apellido(s)</label>
+                            <input type="text" class="form-control" id="textapellidos" placeholder="Apellidos">
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroCuenta">Numero de cuenta</label>
+                            <input type="text" class="form-control" id="textnumerocuenta" placeholder="Numero Cuenta">
+                        </div>
+                        <div class="form-group">
+                            <label for="departamentoempleado">Departamento</label>
+                            <select class="form-control" id="selectdepartamento">
+                                <option value="Finanzas">Finanzas</option>
+                                <option value="Sistemas">Sistemas</option>
+                                <option value="Mercadotecnia">Mercadotecnia</option>
+                                <option value="Administración">Administración</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                        <input type="button" value="Modificar" class="btn" onclick="modificar()">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
             document.getElementById("textnumerocuenta").value="";
             document.getElementById("selectdepartamento").value="";
        };
-       function buscar(){
+        function buscar(){
            var clave=document.getElementById("teztbuscarempleado").value;
            var tipo=document.getElementById("seleccion_parametro").value;
            var ac=0;
@@ -176,7 +176,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -194,7 +194,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -212,7 +212,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -230,7 +230,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
 
                        }
                    }
@@ -238,12 +238,17 @@
                    
            }
        };
-       function borrar(i){
+        function borrar(i){
            arr.splice(i,1);
            buscar();
            };
-       function modificar(i){
-           
+        function modificar(i){
+            document.getElementById("textnombreempleado").value=""+arr[i].nombre;
+            document.getElementById("textapellidos").value=arr[i].apellidos;
+            document.getElementById("textnumerocuenta").value=arr[i].numero;
+            document.getElementById("selectdepartamento").value=arr[i].depto;
+            arr.splice(i,1);
+            buscar(); 
        };
         
     </script>
