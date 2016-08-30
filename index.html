@@ -128,13 +128,12 @@
                 </div>
             </div>
         </div>
-        
         <footer class="panel-footer">Golden Cloud Factory &#174</footer>
     </body> 
     <script>
         var arr=new Array();
         var cont=0;
-       function registrar(){
+        function registrar(){
            var nombre=document.getElementById("textnombreempleado").value;
             var apellidos=document.getElementById("textapellidos").value;
             var numero=document.getElementById("textnumerocuenta").value;
@@ -177,7 +176,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button class='btn btn-default' type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn btn-default' onclick=borrar(row)>Borrar</button>";
                        }
                    }
                    break;
@@ -195,7 +194,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button class='btn btn-default' type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn btn-default' onclick=borrar(row)>Borrar</button>";
                        }
                    }
                    break;
@@ -213,7 +212,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button class='btn btn-default' type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn btn-default' onclick=borrar(row)>Borrar</button>";
                        }
                    }
                    break;
@@ -231,14 +230,19 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button class='btn btn-default' type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn btn-default' onclick=borrar(row)>Borrar</button>";
                        }
                    }
                    break;
                    
            }
        };
-       function borrar(i){
+       function borrar(r){
+           var m= r.parentNode.parentNode.rowIndex;
+           document.getElementById("tabla").deleteRow(m);
+           
+           
+           
            /*Aqui recibe el indice del cosito que quiere borrar, entonces busca en el arreglo y lo quita a partir de arr[i] y en la tabla 
            lo quita con tabla.deleteRow(i) y hay que restarle uno al cont para que pueda agregar bien el que sigue sin que muera :) ahora que lo veo creo que el id es innecesario pero lo voy a dejar ahi por si lel*/
        };
