@@ -241,10 +241,15 @@
            var m= r.parentNode.parentNode.rowIndex;
            document.getElementById("tabla").deleteRow(m);
            
+           for(var i=0; i<cont;i++){
+                if(arr[i].id.includes(m)){
+                    for(var n=0; n<cont;n++){
+                    arr[i].splice(0, arr.length); 
+                    }
+                }
+           }
            
-           
-           /*Aqui recibe el indice del cosito que quiere borrar, entonces busca en el arreglo y lo quita a partir de arr[i] y en la tabla 
-           lo quita con tabla.deleteRow(i) y hay que restarle uno al cont para que pueda agregar bien el que sigue sin que muera :) ahora que lo veo creo que el id es innecesario pero lo voy a dejar ahi por si lel*/
+           /*Aqui recibe el indice del cosito que quiere borrar, entonces busca en el arreglo y lo quita a partir de arr[i] y hay que restarle uno al cont para que pueda agregar bien el que sigue sin que muera :) ahora que lo veo creo que el id es innecesario pero lo voy a dejar ahi por si lel*/
        };
        function modificar(i){
            
