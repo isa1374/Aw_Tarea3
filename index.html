@@ -84,10 +84,10 @@
                     <div class="form-group">
                         <label for="departamentoempleado">Departamento</label>
                         <select class="form-control" id="selectdepartamento">
-                            <option>Finanzas</option>
-                            <option>Sistemas</option>
-                            <option>Mercadotecnia</option>
-                            <option>Administración</option>
+                            <option value="Finanzas">Finanzas</option>
+                            <option value="Sistemas">Sistemas</option>
+                            <option value="Mercadotecnia">Mercadotecnia</option>
+                            <option value="Administración">Administración</option>
                         </select>
                     </div>
                     <input type="submit" value="Registrar" >
@@ -97,19 +97,22 @@
         <section class="container-fluid" id="Buscar_empleado">
             <div class="jumbotron" id="formBuscar">
                 <p>Buscar</p>
-                <form class="form-inline">
+                <form class="form-inline" onsubmit="buscar()">
                     <div class="form-group">
                         <label for="buscaEmpleado">Buscar por:</label>
                         <select class="form-control" id="seleccion_parametro">
-                            <option>Nombre</option>
-                            <option>Apellidos</option>
-                            <option>Numero de cuenta</option>
-                            <option>Departamento</option>
+                            <option value="nombre">Nombre</option>
+                            <option value="apellido">Apellidos</option>
+                            <option value="numero">Numero de cuenta</option>
+                            <option value="depto">Departamento</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado">
-                    </div>    
+                       <input type="submit" value="Buscar">
+                    </div> 
+                    <table id="tabla_resultados">
+                    </table>
                 </form>
             </div>
             <div class="alert alert-info" role="alert" id="Resultados">
@@ -185,12 +188,6 @@
                                 <th>Numero de Cuenta</th>
                                 <th>Departamento</th>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                         </table>
                 </div>
                  <div id="modal_confirmación">
@@ -237,5 +234,92 @@
             cell3.innerHTML = numero;
             cell4.innerHTML = depto;
        };
+       function buscar(){
+           var clave=document.getElementById("teztbuscarempleado").value;
+           var tipo=document.getElementById("seleccion_parametro").value;
+           var ac=0;
+           var tabla = document.getElementById("tabla_resultados");
+           tabla.innerHTML="";
+           var theader= tabla.createTHead();
+           var row=theader.insertRow(ac);
+           var cell1 = row.insertCell(0);
+           var cell2 = row.insertCell(1);
+           var cell3= row.insertCell(2);
+           var cell4 = row.insertCell(3);
+           cell1.innerHTML="Nombre";
+           cell2.innerHTML="Apellidos";
+           cell3.innerHTML="Número de Cuenta";
+           cell4.innerHTML="Departamento";
+           switch(tipo){
+               case "nombre":
+                   for(var i=0; i<cont;i++){
+                       if(arr[i].nombre.includes(clave)){
+                           ac++;
+                           row = tabla.insertRow(ac);
+                           cell1 = row.insertCell(0);
+                           cell2 = row.insertCell(1);
+                           cell3 = row.insertCell(2);
+                           cell4 = row.insertCell(3);
+                            cell1.innerHTML = arr[i].nombre;
+                            cell2.innerHTML = arr[i].apellidos;
+                            cell3.innerHTML = arr[i].numero;
+                            cell4.innerHTML = arr[i].depto;
+                       }
+                   }
+                   break;
+               case "apellido":
+                   for(var i=0; i<cont;i++){
+                       if(arr[i].apellidos.includes(clave)){
+                           ac++;
+                           row = tabla.insertRow(ac);
+                           cell1 = row.insertCell(0);
+                           cell2 = row.insertCell(1);
+                           cell3 = row.insertCell(2);
+                           cell4 = row.insertCell(3);
+                            cell1.innerHTML = arr[i].nombre;
+                            cell2.innerHTML = arr[i].apellidos;
+                            cell3.innerHTML = arr[i].numero;
+                            cell4.innerHTML = arr[i].depto;
+                       }
+                   }
+                   break;
+               case "numero":
+                   for(var i=0; i<cont;i++){
+                       if(arr[i].numero.includes(clave)){
+                           ac++;
+                           row = tabla.insertRow(ac);
+                           cell1 = row.insertCell(0);
+                           cell2 = row.insertCell(1);
+                           cell3 = row.insertCell(2);
+                           cell4 = row.insertCell(3);
+                            cell1.innerHTML = arr[i].nombre;
+                            cell2.innerHTML = arr[i].apellidos;
+                            cell3.innerHTML = arr[i].numero;
+                            cell4.innerHTML = arr[i].depto;
+                       }
+                   }
+                   break;
+               case "depto":
+                   for(var i=0; i<cont;i++){
+                       if(arr[i].depto.includes(clave)){
+                           ac++;
+                           row = tabla.insertRow(ac);
+                           cell1 = row.insertCell(0);
+                           cell2 = row.insertCell(1);
+                           cell3 = row.insertCell(2);
+                           cell4 = row.insertCell(3);
+                            cell1.innerHTML = arr[i].nombre;
+                            cell2.innerHTML = arr[i].apellidos;
+                            cell3.innerHTML = arr[i].numero;
+                            cell4.innerHTML = arr[i].depto;
+                       }
+                   }
+                   break;
+                   
+           }
+       };
+       function borrar(){};
+       function modificar(){};
+        
     </script>
 </html>
