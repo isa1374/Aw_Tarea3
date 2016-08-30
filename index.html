@@ -176,7 +176,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -194,7 +194,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -212,7 +212,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
                        }
                    }
                    break;
@@ -230,7 +230,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
 
                        }
                    }
@@ -238,9 +238,7 @@
                    
            }
        };
-       function borrar(i,row){
-           var m=row.rowIndex;
-           console.log(m);
+       function borrar(i){
            arr.splice(i,1);
            buscar();
            };
