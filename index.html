@@ -28,7 +28,7 @@
                                 <img alt="GCF" src="Logo/GCF_30x26.png">
                             </a>
                 </div>
-                <form class="navbar-form" role="search" onsubmit="buscar()">
+                <form class="navbar-form" role="search">
                     <div class="form-group">
                         <label for="buscaEmpleado">Buscar por:</label>
                         <select class="form-control" id="seleccion_parametro">
@@ -40,7 +40,7 @@
                     </div>
                       <div class="form-group">
                         <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado">
-                          <button type="submit" class="btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
+                          <button type="button" class="btn" onclick="buscar()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
                 </form>
             </div>
         </nav>
@@ -63,7 +63,7 @@
                 <h3 class="modal-title">Agregar empleado</h3>
                 </div>
                 <div class="modal-body">
-                <form onsubmit="registrar()">
+                <form>
                     <div class="form-group">
                         <label for="nombreEmpleado">Nombre</label>
                         <input type="text" class="form-control" id="textnombreempleado" placeholder="Nombre">
@@ -86,7 +86,7 @@
                         </select>
                     </div>
                     <div class="modal-footer">
-                    <input type="submit" value="Registrar" class="btn">
+                    <input type="button" value="Registrar" class="btn" onclick="registrar()">
                     </div>
                 </form>
                 </div>
@@ -166,7 +166,7 @@
                case "nombre":
                    for(var i=0; i<cont;i++){
                        if(arr[i].nombre.includes(clave)){
-                           ac++;
+                            ac++;
                            row = tabla.insertRow(ac);
                            cell1 = row.insertCell(0);
                            cell2 = row.insertCell(1);
@@ -177,7 +177,7 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
                        }
                    }
                    break;
@@ -195,14 +195,14 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
                        }
                    }
                    break;
                case "numero":
                    for(var i=0; i<cont;i++){
                        if(arr[i].numero.includes(clave)){
-                           ac++;
+                            ac++;
                            row = tabla.insertRow(ac);
                            cell1 = row.insertCell(0);
                            cell2 = row.insertCell(1);
@@ -213,14 +213,14 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
                        }
                    }
                    break;
                case "depto":
                    for(var i=0; i<cont;i++){
                        if(arr[i].depto.includes(clave)){
-                             ac++;
+                              ac++;
                            row = tabla.insertRow(ac);
                            cell1 = row.insertCell(0);
                            cell2 = row.insertCell(1);
@@ -231,16 +231,18 @@
                             cell2.innerHTML = arr[i].apellidos;
                             cell3.innerHTML = arr[i].numero;
                             cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' onclick=borrar("+i+")>Borrar</button>";
+                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Modificar_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+",row)>Borrar</button>";
                        }
                    }
                    break;
                    
            }
        };
-       function borrar(i){
-           /*Aqui recibe el indice del cosito que quiere borrar, entonces busca en el arreglo y lo quita a partir de arr[i] y en la tabla 
-           lo quita con tabla.deleteRow(i) y hay que restarle uno al cont para que pueda agregar bien el que sigue sin que muera :) ahora que lo veo creo que el id es innecesario pero lo voy a dejar ahi por si lel*/
+       function borrar(i,row){
+           var m=row.rowIndex;
+           console.log(m);
+           arr.splice(i,1);
+           buscar();
        };
        function modificar(i){
            

@@ -22,7 +22,7 @@ nav{
 .jumbotron{
     background: white;
 }
-#table_header{
+th{
     background:#395D99;
     color:white;
 }
