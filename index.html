@@ -64,7 +64,7 @@ Isabel García Pérez A01331405
             <div class="modal-content">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Agregar empleado</h3>
+                <h3 class="modal-title" id="header_title">Agregar empleado</h3>
                 </div>
                 <div class="modal-body">
                 <form>
@@ -211,6 +211,7 @@ Isabel García Pérez A01331405
            buscar();
            };
         function modificar(i){
+            header_title.innerText="Modificar empleado";
             document.getElementById("textnombreempleado").value=""+arr[i].nombre;
             document.getElementById("textapellidos").value=arr[i].apellidos;
             document.getElementById("textnumerocuenta").value=arr[i].numero;
