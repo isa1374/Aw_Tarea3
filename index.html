@@ -3,7 +3,7 @@ Carla Lorena Flores Subias A01331363
 Isabel García Pérez A01331405
 -->
 <!DOCTYPE html>
-<html>
+<html ng-app="listaEmpleados">
     <head>
         <title>Golden Cloud Factory</title>
         <meta charset="UTF-8"/>
@@ -11,8 +11,62 @@ Isabel García Pérez A01331405
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="css/GCF.css"/>
+        <script src="angular.js"></script>
+        <script>
+        var modelo={acciones:[{nombre:"Carla",apellidos:"Flores",num:"A01331363",depto:"Sistemas", ocultar:false}]};
+        var listaEmpleados= angular.module("listaEmpleados", []);
+        listaEmpleados.controller("listaEmpleadosController", function($scope){
+            $scope.empleados=modelo;
+            $scope.nuevoEmpleado=function(nombre,apellidos,num,depto){
+                $scope.empleados.acciones.push({nombre:nombre,apellidos:apellidos,num:num,depto:depto, ocultar:false});
+            }
+            $scope.buscar=function(opcion,textoBuscar){   
+                switch(opcion){
+                    case "nombre":
+                        angular.forEach($scope.empleados.acciones, function(item){
+                        if(!item.nombre.includes(textoBuscar)){
+                            item.ocultar=true;
+                        }else{
+                            item.ocultar=false;
+                        }
+                        });
+                    break;
+                    case "apellidos":
+                        angular.forEach($scope.empleados.acciones, function(item){
+                        if(!item.apellidos.includes(textoBuscar)){
+                            item.ocultar=true;
+                        }else{
+                            item.ocultar=false;
+                        }
+                    });
+                    break;
+                    case "numero":
+                        angular.forEach($scope.empleados.acciones, function(item){
+                        if(!item.num.includes(textoBuscar)){
+                            item.ocultar=true;
+                        }else{
+                            item.ocultar=false;
+                        }
+                    });
+                    break;
+                    case "depto":
+                        angular.forEach($scope.empleados.acciones, function(item){
+                        if(!item.depto.includes(textoBuscar)){
+                            item.ocultar=true;
+                        }else{
+                            item.ocultar=false;
+                        }
+                    });
+                    break;
+                }
+            }
+        $scope.borrar=function(i){   
+                $scope.empleados.acciones.pop(i);
+            }
+        });
+    </script>
     </head>
-    <body>
+    <body ng-controller="listaEmpleadosController">
         <header class="page-header">
             <div class="row head">
                 <div class="col-sm-4"></div>
@@ -35,7 +89,7 @@ Isabel García Pérez A01331405
                 <form class="navbar-form" role="search">
                     <div class="form-group">
                         <label for="buscaEmpleado">Buscar por:</label>
-                        <select class="form-control" id="seleccion_parametro">
+                        <select class="form-control" id="seleccion_parametro" ng-model="opcion">
                             <option value="nombre">Nombre</option>
                             <option value="apellido">Apellidos</option>
                             <option value="numero">Numero de cuenta</option>
@@ -43,8 +97,8 @@ Isabel García Pérez A01331405
                         </select>
                     </div>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado">
-                          <button type="button" class="btn" onclick="buscar()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
+                        <input type="text" class="form-control" id="teztbuscarempleado" placeholder="Buscar Empleado" ng-model="textoBuscar">
+                          <button type="button" class="btn" ng-click="buscar(opcion,textoBuscar)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
                 </form>
             </div>
         </nav>
@@ -57,7 +111,18 @@ Isabel García Pérez A01331405
                             <th>Apellidos</th>
                             <th>Numero de Cuenta</th>
                             <th>Departamento</th>
+                            <th></th>
                         </tr>
+                         <tbody>
+                            <tr ng-repeat="item in empleados.acciones">
+                                    <td ng-hide=item.ocultar>{{item.nombre}}</td>
+                                    <td ng-hide=item.ocultar>{{item.apellidos}}</td>
+                                    <td ng-hide=item.ocultar>{{item.num}}</td>
+                                    <td ng-hide=item.ocultar>{{item.depto}}</td>
+                                    <td ng-hide=item.ocultar><button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' ng-click=modificar(item)>Modificar</button><button type='button' class='btn' ng-click=borrar(item)>Borrar</button></td>
+                                </div>
+                            </tr>
+                        </tbody>
                     </table>
         </section>
         <div class="container-fluid modal fade modal-sm" id="Crear_empleado">
@@ -70,19 +135,19 @@ Isabel García Pérez A01331405
                 <form>
                     <div class="form-group">
                         <label for="nombreEmpleado">Nombre</label>
-                        <input type="text" class="form-control" id="textnombreempleado" placeholder="Nombre">
+                        <input type="text" class="form-control" id="textnombreempleado" placeholder="Nombre" ng-model="nombre">
                     </div>
                     <div class="form-group">
                         <label for="apellidosEmpleado">Apellido(s)</label>
-                        <input type="text" class="form-control" id="textapellidos" placeholder="Apellidos">
+                        <input type="text" class="form-control" id="textapellidos" placeholder="Apellidos" ng-model="apellidos">
                     </div>
                     <div class="form-group">
                         <label for="numeroCuenta">Numero de cuenta</label>
-                        <input type="text" class="form-control" id="textnumerocuenta" placeholder="Numero Cuenta">
+                        <input type="text" class="form-control" id="textnumerocuenta" placeholder="Numero Cuenta" ng-model="num">
                     </div>
                     <div class="form-group">
                         <label for="departamentoempleado">Departamento</label>
-                        <select class="form-control" id="selectdepartamento">
+                        <select class="form-control" id="selectdepartamento" ng-model="depto">
                             <option value="Finanzas">Finanzas</option>
                             <option value="Sistemas">Sistemas</option>
                             <option value="Mercadotecnia">Mercadotecnia</option>
@@ -90,7 +155,7 @@ Isabel García Pérez A01331405
                         </select>
                     </div>
                     <div class="modal-footer">
-                    <input type="button" value="Registrar" class="btn" onclick="registrar()">
+                    <input type="button" value="Registrar" class="btn" ng-click="nuevoEmpleado(nombre,apellidos,num,depto)">
                     </div>
                 </form>
                 </div>
@@ -98,126 +163,4 @@ Isabel García Pérez A01331405
         </div>
         <footer class="panel-footer">Golden Cloud Factory &#174</footer>
     </body> 
-    <script>
-        var arr=new Array();
-        var cont=0;
-        function registrar(){
-           var nombre=document.getElementById("textnombreempleado").value;
-            var apellidos=document.getElementById("textapellidos").value;
-            var numero=document.getElementById("textnumerocuenta").value;
-            var depto=document.getElementById("selectdepartamento").value;
-           arr.push({ id:cont,nombre: nombre, apellidos: apellidos, numero:numero, depto:depto});
-           cont++;
-           var tabla = document.getElementById("tabla");
-           var row = tabla.insertRow(-1);
-           var cell1 = row.insertCell(0);
-           var cell2 = row.insertCell(1);
-           var cell3 = row.insertCell(2);
-           var cell4 = row.insertCell(3);
-            cell1.innerHTML = nombre;
-            cell2.innerHTML = apellidos;
-            cell3.innerHTML = numero;
-            cell4.innerHTML = depto;
-            document.getElementById("textnombreempleado").value="";
-            document.getElementById("textapellidos").value="";
-            document.getElementById("textnumerocuenta").value="";
-            document.getElementById("selectdepartamento").value="";
-       };
-        function buscar(){
-           var clave=document.getElementById("teztbuscarempleado").value;
-           var tipo=document.getElementById("seleccion_parametro").value;
-           var ac=0;
-           var tabla = document.getElementById("tabla");
-           tabla.innerHTML="<tr><th>Nombre</th><th>Apellidos</th><th>Numero de Cuenta</th><th>Departamento</th><th></th></tr>";
-           switch(tipo){
-               case "nombre":
-                   for(var i=0; i<cont;i++){
-                       if(arr[i].nombre.includes(clave)){
-                            ac++;
-                           row = tabla.insertRow(ac);
-                           cell1 = row.insertCell(0);
-                           cell2 = row.insertCell(1);
-                           cell3 = row.insertCell(2);
-                           cell4 = row.insertCell(3);
-                           cell5 = row.insertCell(4);
-                            cell1.innerHTML = arr[i].nombre;
-                            cell2.innerHTML = arr[i].apellidos;
-                            cell3.innerHTML = arr[i].numero;
-                            cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
-                       }
-                   }
-                   break;
-               case "apellido":
-                   for(var i=0; i<cont;i++){
-                       if(arr[i].apellidos.includes(clave)){
-                           ac++;
-                           row = tabla.insertRow(ac);
-                           cell1 = row.insertCell(0);
-                           cell2 = row.insertCell(1);
-                           cell3 = row.insertCell(2);
-                           cell4 = row.insertCell(3);
-                           cell5 = row.insertCell(4);
-                            cell1.innerHTML = arr[i].nombre;
-                            cell2.innerHTML = arr[i].apellidos;
-                            cell3.innerHTML = arr[i].numero;
-                            cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
-                       }
-                   }
-                   break;
-               case "numero":
-                   for(var i=0; i<cont;i++){
-                       if(arr[i].numero.includes(clave)){
-                            ac++;
-                           row = tabla.insertRow(ac);
-                           cell1 = row.insertCell(0);
-                           cell2 = row.insertCell(1);
-                           cell3 = row.insertCell(2);
-                           cell4 = row.insertCell(3);
-                           cell5 = row.insertCell(4);
-                            cell1.innerHTML = arr[i].nombre;
-                            cell2.innerHTML = arr[i].apellidos;
-                            cell3.innerHTML = arr[i].numero;
-                            cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
-                       }
-                   }
-                   break;
-               case "depto":
-                   for(var i=0; i<cont;i++){
-                       if(arr[i].depto.includes(clave)){
-                              ac++;
-                           row = tabla.insertRow(ac);
-                           cell1 = row.insertCell(0);
-                           cell2 = row.insertCell(1);
-                           cell3 = row.insertCell(2);
-                           cell4 = row.insertCell(3);
-                           cell5 = row.insertCell(4);
-                            cell1.innerHTML = arr[i].nombre;
-                            cell2.innerHTML = arr[i].apellidos;
-                            cell3.innerHTML = arr[i].numero;
-                            cell4.innerHTML = arr[i].depto;
-                            cell5.innerHTML = "<button type='button' class='btn' data-toggle='modal' data-target='#Crear_empleado' onclick=modificar("+i+")>Modificar</button><button type='button' class='btn' onclick=borrar("+i+")>Borrar</button>";
-
-                       }
-                   }
-                   break;
-                   
-           }
-       };
-        function borrar(i){
-           arr.splice(i,1);
-           buscar();
-           };
-        function modificar(i){
-            header_title.innerText="Modificar empleado";
-            document.getElementById("textnombreempleado").value=""+arr[i].nombre;
-            document.getElementById("textapellidos").value=arr[i].apellidos;
-            document.getElementById("textnumerocuenta").value=arr[i].numero;
-            document.getElementById("selectdepartamento").value=arr[i].depto;
-            arr.splice(i,1);
-            buscar(); 
-       };
-    </script>
 </html>
