@@ -63,6 +63,11 @@ Isabel García Pérez A01331405
         $scope.borrar=function(i){   
                 $scope.empleados.acciones.pop(i);
             }
+        
+        $scope.modificar= function(i){
+            $scope.empleados.acciones.shift(i);
+            $scope.empleados.acciones.unshift({nombre:nombre,apellidos:apellidos,num:num,depto:depto, ocultar:false});
+            }
         });
     </script>
     </head>
