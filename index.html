@@ -61,7 +61,9 @@ Isabel García Pérez A01331405
                 }
             }
         $scope.borrar=function(i){   
-                $scope.empleados.acciones.pop(i);
+                var index=$scope.empleados.acciones.indexOf(i);
+                alert(index);
+                $scope.empleados.acciones.splice(index,1);
             }
         
         $scope.modificar= function(i){
